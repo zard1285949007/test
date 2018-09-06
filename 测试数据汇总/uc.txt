@@ -1,0 +1,57 @@
+1.IDFA->原值转大写，计算 32 位md5sum，再转大写
+  IMEI->原值转大写，计算32 位 md5sum，再转大写
+  TS->
+  IP->
+  OS->0 表示 Ios ,1 表示 Android,2 其他
+  UA->经过 url encode 的字符串
+  AID->原值,广告单元 ID
+  CID->原值,广告创意 ID
+  MAC_SUM->保留 “:”，保持大写，取md5sum，再转大写
+  MAC_SUM1->去除“:”，保持大写，取md5sum，再转大写
+  CALLBACK_URL->经过 url encode 后的 url
+
+缺少字段:muid,click_id
+
+
+2.广告后台地址:https://e.uc.cn
+  账号:武汉手盟网络科技股份有限公司
+  密码:110@910APP.com
+  测试点击回传地址:(安卓)http://dataspy.910app.com/adapi/ad/uc?imei={IMEI_SUM}&time={TS}&callback={CALLBACK_URL}&aid={AID}&cid={CID}&mac={MAC_SUM}&ua={UA}&os={OS}&ip={IP}&ad_plan=9090099_1_2_123(android帝王霸权)&ch=tt
+
+3.回传数据
+{
+	"s": "index\/index\/test.html",
+	"imei": "CB08CA4A7BB5F9683C19133A84872CA7",
+	"time": "1531108282383",
+	"callback": "http:\/\/huichuan.sm.cn\/td?tp_type=roi&click_id=14440073948345275833&convert_id=87001&event_type=1",
+	"aid": "0",
+	"cid": "0",
+	"mac": "",
+	"ua": "Mozilla\/5.0 (Linux; U; Android 7.0; zh-CN; M5 Note Build\/NRD90M) AppleWebKit\/537.36 (KHTML, like Gecko) Version\/4.0 Chrome\/57.0.2987.108 UCBrowser\/11.8.8.968 UWS\/2.13.1.42 Mobile Safari\/537.36 UCBS\/2.13.1.42_180629181124 NebulaSDK\/1.8.100112 Nebula AlipayDefined(nt:3G,ws:360|0|3.0) AliApp(AP\/10.1.28.560) AlipayClient\/10.1.28.560 Language\/zh-Hans useStatusBar\/true isConcaveScreen\/false",
+	"os": "1",
+	"ip": "110.75.242.156",
+	"ad_plan": "9090099_1_2_123(??????)",
+	"ch": "tt"
+}
+
+注意:不能传中文
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

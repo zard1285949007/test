@@ -1,0 +1,2 @@
+__conv__¡± ¼°¡°__device_id__
+http://dataspy.910app.com/adapi/ad/uc?conv=__conv__&device_id=__device_id__&os=__os__&ts=__ts__&key=123456

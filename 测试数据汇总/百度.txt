@@ -1,0 +1,55 @@
+1.IDFA->原值
+  IMEI->直接md5
+  TS->
+  IP->
+  CLICK_ID->
+  OS->1:IOS;2:Android
+  UA->
+  AID-> 创意ID
+  PID-> 计划ID
+  UID->单元ID
+
+
+缺少字段:muid,mac
+
+
+2.
+广告投放地址:http://www2.baidu.com
+账号:原生-手盟-2170158
+密码:Shiyou95588app
+api文档地址:http://jinshu.baidu.com/preview?from=app&productId=202&versionId=250&tab=3&ch=99
+点击回传地址(安卓):http://dataspy.910app.com/adapi/ad/uc?&os={{OS}}&ip={{IP}}&ua={{UA}}&ts={{TS}}&Imei_md5={{IMEI_MD5}}&pid={{PLAN_ID}}&uid={{UNIT_ID}}&aid={{IDEA_ID}}&click_id={{CLICK_ID}}&callback_url={{CALLBACK_URL}}&ad_plan=9090099_1_2_123(android帝王霸权)&ch=tt&sign={{SIGN}}
+
+3.有回传自定义字段的,当时没记录.
+
+{
+	"s": "index\/index\/test.html",
+	"imei_md5": "48aa8a544ab49645a700fe84ddc7e440",
+	"os": "1",
+	"ip": "123.45.56.78",
+	"ua": "NULL",
+	"ts": "1531125634401",
+	"userid": "22995925",
+	"pid": "12345",
+	"uid": "23456",
+	"aid": "34567",
+	"click_id": "MjI5OTU5MjUtMTUzMTExOTMzMg==_1531125634401",
+	"callback_url": "http:\/\/als.baidu.com\/cb\/actionCb?a_type={{ATYPE}}&a_value={{AVALUE}}&s=MjI5OTU5MjUtMTUzMTExOTMzMg==&o=1531125634401&ext_info=0dcoQH7Y1fPOgWZzjoOKWh7Sp6i00eAWpC62lrSPgwnuPa6zcUNIcZs2HrTIduGJ4TprJfccUfdLAlIytoksKEYKepqBrU/9WxaqUmg0Tow/Dht/OHdroNkn7TWJHpy01pAh6oGNTVJV51jKYvbe4jCbcpMR/zYvbjH0dbxJeZDrq8whr0/HXVbEP8TDeCJOp/C/p7DF/lxglFNUjLT+K3VVAIgeHVFwd82CoRl8/uuootW0nS6lrA595s3J067CaW/N3MQfUMtgA8ZinlqXvjXxqXdWcBJ1RRnsUpCFrYGDuKiKbWeuYS0r0xav6CkU6GfL0ARvWRa9PURSdPAFifEEW7ojXy3V20FOth3v9bU+AmnFEaaz3newbOJUr5O0X3CLqmo+8zm04uPkigw8aqDSL9nhMhM4",
+	"sign": "cd0c5940f3d9aee961198a97d54d0209"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

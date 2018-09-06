@@ -1,0 +1,143 @@
+1.1.
+  TS->
+  MUID->用imei或idfa直接md5
+  CLICK_ID->
+  OS->app_type：app 类型；取值为 ios 或者 android；请兼容大小写
+  
+缺少:imei,idfa,muid,ua,aid,cid,mac
+
+
+2.广告投放地址:http://e.qq.com
+  账号:3158397658
+  密码:Shoum%100
+  点击回传地址:http://dataspy.910app.com/adapi/ad/uc?ad_plan=9090099&ch=tt
+
+  https://developers.e.qq.com/ 
+  账号：3497276971
+  密码：FEIYU910APP
+authorization_code
+http://tj.910app.com/api/ad/qqgdt/17430099?smapt=2
+
+https://dataspy.910app.com/adapi/ad_click/test1?authorization_code=f1129a5e1f4423148b107d38e5ef5e1f&state=24
+https://api.e.qq.com/oauth/token?client_id=1106837149&client_secret=UGR9OT06yQuFLkg3&grant_type=authorization_code&authorization_code=f1129a5e1f4423148b107d38e5ef5e1f&redirect_uri=https%3A%2F%2Fdataspy.910app.com%2Fadapi%2Fad_click%2Ftest1
+3.回传数据
+
+{
+	"ad_plan": "9090099",
+	"ch": "tt",
+	"muid": "6b29d0ab6083ad680ceb9febc30aadb2",
+	"click_time": "1531276966",
+	"appid": "1214865649",
+	"click_id": "7937e8c4988d401ad66db878e8602025",
+	"app_type": "ios",
+	"advertiser_id": "1486973"http://dataspy.910app.cjavascript:;om/adapi/ad_click/gdt?key=123
+}
+
+
+
+//新的广点通的验证方法
+注意事项:1.authorization_code只能用一次,即只能访问一次,多了即为无效
+	2.创建应用的回调地址和获取authorization_code和获取access_token,refresh_token的回调地址,即redirect_uri必须一致
+疑问:这个回调地址是不是就是点击数据的回传地址呢.
+
+
+功能实现流程:
+一.获取access_token和refresh_token
+(1)获取authorization_code
+	访问地址:https://developers.e.qq.com/oauth/authorize?client_id=1106837149&redirect_uri=https%3A%2F%2Fdataspy.910app.com%2Fadapi%2Fad_click%2Ftest1&state=24
+	说明:用上面的访问地址在浏览器中访问后,点击同意授权后,腾讯会用一个带参authorization_code和state的地址进行访问我们的地址,我们这样就可以获取得到authorization_code
+		https://dataspy.910app.com/adapi/ad_click/test1?authorization_code=eb01e9e27cd8de7ef50114146208f0aa&state=24
+	难点:无法进行自动,现在必须要手动点击这个同意授权
+(2)通过authorization_code获取access_token(有效期为1天)和refresh_token(有效期为30天),每次刷新access_token时， refresh_token会自动续期。
+	获取access_token地址:https://api.e.qq.com/oauth/token?client_id=1106837149&client_secret=UGR9OT06yQuFLkg3&grant_type=authorization_code&authorization_code=f1129a5e1f4423148b107d38e5ef5e1f&redirect_uri=https%3A%2F%2Fdataspy.910app.com%2Fadapi%2Fad_click%2Ftest1
+	回传数据:(json格式)
+		{
+	"code": 0,
+	"message": "",
+	"data": {
+		"authorizer_info": {
+			"account_uin": 3497276971,
+			"account_id": 6211899,
+			"scope_list": ["user_actions"]
+		},
+		"access_token": "84c044183b0e08a54f2a35265b76fe5f",
+		"refresh_token": "9e4fa8c69d0295dc3dfe5853b9183aee",
+		"access_token_expires_in": 86400,
+		"refresh_token_expires_in": 63072000
+		}
+	}
+	获取refresh_token的地址:https://api.e.qq.com/oauth/token?client_id=1106837149&client_secret=UGR9OT06yQuFLkg3&grant_type=refresh_token&refresh_token=044f8fe68b311c936f62ecb727965c6d&redirect_uri=https%3A%2F%2Fdataspy.910app.com%2Fadapi%2Fad_click%2Ftest1
+	回传数据(json格式)
+	{
+	"code": 0,
+	"message": "",
+	"data": {
+		"refresh_token": "044f8fe68b311c936f62ecb727965c6d",
+		"access_token": "721ff190909a0a11b463b09351b49623",
+		"access_token_expires_in": 86400
+		}
+	}
+(二)进行上报激活数据
+	(1)创建用户行为数据源(这里要用post进行提交,前面的都是get方式进行访问的)
+	请求地址:https://api.e.qq.com/v1.0/user_action_sets/add?access_token=<ACCESS_TOKEN>&timestamp=<TIMESTAMP>&nonce=<NONCE>
+	请求参数:account_id推广账号id(为推广账号的id)6211899
+		type用户行为源类型 WEB, ANDROID, IOS
+		mobile_app_id应用 id， IOS ： App Store id ； ANDROID ：应用宝 id
+		name未填写该字段，则默认通过 mobile_app_id 获取名称
+		description用户行为源描述
+	应答:
+		{
+    			"code": 0,
+    			"message": "",
+    			"data": {
+        			"user_action_set_id": "<USER_ACTION_SET_ID>"
+   				 }
+		}
+
+	(2)上传用户行为数据
+	请求地址:https://api.e.qq.com/v1.0/user_actions/add?access_token=<ACCESS_TOKEN>&timestamp=<TIMESTAMP>&nonce=<NONCE>
+	请求参数:
+		"account_id": "<ACCOUNT_ID>",推广帐号 id
+    		"user_action_set_id": "<USER_ACTION_SET_ID>",用户行为源 id
+    		"actions": [
+        		{
+            		"outer_action_id": "external_action_identity",
+            		"action_time": 1492998081,行为发生时，客户端的时间点
+            		"user_id": {
+                		"hash_imei": "f9efca36a3c30e1cf28170d86ecbf5e9"用户标识
+            		},
+            		"action_type": "CUSTOM",上报类型ACTIVATE_APP为应用激活
+            		"trace": {
+				"click_id":....点击id
+				},
+            	"action_param": {
+	应答:{
+   		 "code": 0,
+   		 "message": ""
+	    }
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

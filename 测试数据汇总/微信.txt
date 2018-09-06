@@ -1,0 +1,28 @@
+1.
+  TS->
+  MUID->用imei或idfa直接md5
+  CLICK_ID->
+  OS->app_type：app 类型；取值为 ios 或者 android；请兼容大小写
+  
+缺少:imei,idfa,muid,ua,aid,cid,mac
+
+2.广告投放地址:https://mp.weixin.qq.com
+  账号:app910yhxj@163.com
+  密码:19meng19meng
+  点击回传地址http://dataspy.910app.com/adapi/ad/uc?ad_plan=9090099&ch=tt
+		BAAAAAAAAAAAYa20
+	sign_key
+		bdcf029321b7ecde
+
+
+3.回传数据:
+{
+	"ad_plan": "9090099",
+	"ch": "tt",
+	"muid": "6b29d0ab6083ad680ceb9febc30aadb2",
+	"click_id": "88888888",
+	"click_time": "1531206755",
+	"appid": "1267695457",
+	"app_type": "ios",
+	"advertiser_id": "6401460"
+}

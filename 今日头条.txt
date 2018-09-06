@@ -1,0 +1,55 @@
+1.IDFA->原值
+  IMEI->取 md5sum 摘要
+  TS->UTC 时间戳, 自 1970 年起的毫秒数
+  IP->
+  OS->0–Android； 1–iOS 2– WP； 3-Others
+  UA->原值
+  AID->原值,广告计划 id
+  CID->原值,广告创意 id
+  MAC->去除分隔符 ":",(保持大写)取 md5sum
+  MAC1->保留分隔符 ":",(保持大写)取 md5sum
+
+缺少的字段:muid,click_id
+  
+2.广告后台地址:http://ad.toutiao.com/
+  账号:385367098@qq.com
+  密码:123456lkY_
+  测试回传地址:安卓:http://dataspy.910app.com/adapi/ad/uc?imei=__IMEI__&timestamp=__TS__&ip=__IP__&os=__OS__&ua=__UA__&aid=__AID__&cid=__CID__&mac=__MAC__&mac1=__MAC1__&callback_url=__CALLBACK_URL__&ad_plan=9090099_1_2_123(ios梦幻仙游)&ch=tt
+
+3.回传数据:
+  {
+	"imei": "48aa8a544ab49645a700fe84ddc7e440",
+	"timestamp": "1531303786000",
+	"ip": "119.145.82.246",
+	"os": "0",
+	"ua": "Dalvik\/2.1.0 (Linux; U; Android 7.0; M5 Note Build\/NRD90M) NewsArticle\/6.8.0 cronet\/58.0.2991.0@59592eaa",
+	"aid": "1605688271149086",
+	"cid": "603690408715303",
+	"mac": "43a38d5e755aa5e94700b2a890bb956d",
+	"mac1": "944e2017ff13fc969187e47035344e71",
+	"callback_url": "http:\/\/ad.toutiao.com\/track\/activate\/?callback=CJ6wlvjWi-0CEK6wlvjWi-0CGKKc3qj2AiDm7PXmkwEonvDt29aL7QIwDDgBQiAyMDE4MDcxMTE4MDkzNjAxMDAwODA2MjIxMzg5OUE4REgBUAA=&os=0&muid=48aa8a544ab49645a700fe84ddc7e440",
+	"ad_plan": "9090099_1_2_123(ios梦幻仙游)",
+	"ch": "tt"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
